@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "us-west-2"
 }
 
 # VPC Configuration
@@ -48,6 +48,50 @@ resource "aws_ecs_task_definition" "weather_app" {
   ])
 }
 
+# Create an ALB
+resource "aws_lb" "app_lb" {
+  name               = "app-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.ecs_sg.id]
+  subnets            = aws_subnet.app_subnet[*].id
+}
+
+# Associate the EIP with the ALB
+resource "aws_eip_association" "alb_eip_association" {
+  allocation_id      = aws_eip.weather_app_eip.id
+  network_interface_id = aws_lb.app_lb.id
+}
+
+# Create a target group for the ECS service
+resource "aws_lb_target_group" "app_tg" {
+  name     = "app-tg"
+  port     = 5000
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.main.id
+
+  health_check {
+    path                = "/"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    matcher             = "200"
+  }
+}
+
+# Create a listener for the ALB to forward traffic to the ECS service
+resource "aws_lb_listener" "app_lb_listener" {
+  load_balancer_arn = aws_lb.app_lb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app_tg.arn
+  }
+}
+
 # ECS Service
 resource "aws_ecs_service" "weather_app_service" {
   name            = "weather-app-service"
@@ -60,6 +104,12 @@ resource "aws_ecs_service" "weather_app_service" {
     subnets         = aws_subnet.app_subnet[*].id
     security_groups = [aws_security_group.ecs_sg.id]
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.app_tg.arn
+    container_name   = "flask_app"
+    container_port   = 5000
+  }
 }
 
 # Elastic IP
@@ -67,8 +117,6 @@ resource "aws_eip" "weather_app_eip" {
   vpc = true
 }
 
-# Associate Elastic IP with ECS Service
-resource "aws_eip_association" "weather_app_eip_association" {
-  allocation_id = aws_eip.weather_app_eip.id
-  instance_id   = aws_ecs_service.weather_app_service.id
+output "elastic_ip" {
+  value = aws_eip.weather_app_eip.public_ip
 }
