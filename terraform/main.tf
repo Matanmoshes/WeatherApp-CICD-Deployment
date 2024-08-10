@@ -38,6 +38,12 @@ resource "aws_ecs_task_definition" "weather_app" {
         containerPort = 5000
         hostPort      = 5000
       }]
+      environment = [
+        {
+          name  = "OPENWEATHER_API_KEY"
+          value = "${var.openweather_api_key}"
+        }
+      ]
     }
   ])
 }
