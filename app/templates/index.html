@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: black;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+            color: black;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .weather-info {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        .weather-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .local-time {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form method="POST">
+        <label for="city">Enter City Name:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather_data %}
+        <div class="weather-info">
+            <h2>Weather in {{ weather_data['name'] }}</h2>
+            <p>Temperature: {{ weather_data['main']['temp'] }} °C</p>
+            <p>Weather: {{ weather_data['weather'][0]['description'] }}</p>
+            <p>Humidity: {{ weather_data['main']['humidity'] }} %</p>
+            <p>Wind Speed: {{ weather_data['wind']['speed'] }} m/s</p>
+            {% if local_time %}
+            <div class="local-time">
+                <p>Local Time: {{ local_time }}</p>
+            </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
