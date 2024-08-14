@@ -30,10 +30,10 @@ jobs:
         run: flake8 app/
 
       - name: Run tests
-        run: pytest tests/
         env:
-            PYTHONPATH: ./app
-
+            PYTHONPATH: ./app 
+            OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+        run: pytest tests/
   build:
     runs-on: ubuntu-latest
     needs: lint-test

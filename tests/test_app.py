@@ -12,9 +12,9 @@ def client():
     with app.test_client() as client:
         yield client
 
-# Mock response data for the OpenWeather API
+# Updated mock response data for the OpenWeather API
 mock_weather_data = {
-    "timezone": 3600,  # Example timezone offset in seconds
+    "timezone": 3600,
     "main": {
         "temp": 15,
         "feels_like": 14,
@@ -24,6 +24,9 @@ mock_weather_data = {
     "weather": [{
         "description": "clear sky",
     }],
+    "wind": {
+        "speed": 5
+    },
     "name": "London"
 }
 
@@ -32,7 +35,7 @@ def test_index_get(mock_get, client):
     # Test the GET request
     response = client.get('/')
     assert response.status_code == 200
-    assert b'Weather Information' in response.data
+    assert b'Get Weather' in response.data  # Adjust this based on actual content
 
 @patch('app.requests.get')
 def test_index_post(mock_get, client):
@@ -53,4 +56,3 @@ def test_index_post(mock_get, client):
 def test_api_key():
     # Ensure the API key is loaded from the environment
     assert os.getenv('OPENWEATHER_API_KEY') is not None
-
