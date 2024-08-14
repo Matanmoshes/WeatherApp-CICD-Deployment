@@ -2,3 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py
+
+# Ignore virtual environments
+.venv/
+venv/
+
+.DS_Store
+Thumbs.db
