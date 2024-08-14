@@ -27,7 +27,9 @@ def index():
         if weather_data and weather_data.get('timezone'):
             utc_time = datetime.utcnow()
             timezone_offset = weather_data['timezone']
-            local_time = utc_time + timedelta(seconds=timezone_offset)
+            local_time = utc_time + timedelta(
+                seconds=timezone_offset
+            )
             local_time = local_time.strftime('%Y-%m-%d %H:%M:%S')
 
     return render_template('index.html', weather_data=weather_data, local_time=local_time)
