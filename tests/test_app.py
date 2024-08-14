@@ -51,7 +51,7 @@ def test_index_post(mock_get, client):
     assert b'15' in response.data  # Temp in Celsius
     
     # Check that the local time is correctly calculated
-    assert b'Local time' in response.data
+    assert b'Local Time' in response.data  # Capitalized 'Time' to match the actual content
 
 def test_api_key():
     # Ensure the API key is loaded from the environment
