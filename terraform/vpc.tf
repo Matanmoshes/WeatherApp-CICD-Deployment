@@ -1,12 +1,18 @@
+# Use AWS account
 provider "aws" {
     region = "us-east-1"
+}
+
+# Data source to fetch available availability zones
+data "aws_availability_zones" "available" {
+    state = "available"
 }
 
 # VPC configuration
 resource "aws_vpc" "main" {
     cidr_block = "10.0.0.0/16"
     tags = {
-        Nmae = "terraform-env-vpc"
+        Name = "terraform-env-vpc"
     }  
 }
 
@@ -44,4 +50,3 @@ resource "aws_route_table_association" "public_rt_assoc" {
     route_table_id = aws_route_table.public_rt.id  
 }
 
-data "aws_availability_zone" "available" {}
