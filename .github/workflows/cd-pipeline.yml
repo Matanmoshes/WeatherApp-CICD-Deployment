@@ -28,10 +28,10 @@ jobs:
                 AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 TF_VAR_openweather_api_key: ${{ secrets.OPENWEATHER_API_KEY }}
 
-            - name: Post Apply - Output EIP
-              run: terraform output -raw elastic_ip
+            - name: Post Apply - Output ALB DNS Name
+              run: terraform output -raw alb_dns_name
               working-directory: terraform
-              id: eip_output
+              id: alb_dns_output
 
             - name: Display the application URL
-              run: echo "Application is deployed at http://$(terraform output -raw elastic_ip):5000"
+              run: echo "Application is deployed at http://$(terraform output -raw alb_dns_name)"
