@@ -68,4 +68,5 @@ jobs:
         with:
           name: docker-image-name
           path: image_name.txt
+          retention-days: 5
 
