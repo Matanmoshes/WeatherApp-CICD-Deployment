@@ -59,3 +59,12 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/weather-app:latest
           build-args: |
             OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}
+
+      - name: Save Docker image name as artifact
+        run: echo "DOCKER_IMAGE=${{ secrets.DOCKER_USERNAME }}/weather-app:latest" > image_name.txt
+        
+      - name: Upload Docker image name as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: docker-image-name
+          path: image_name.txt

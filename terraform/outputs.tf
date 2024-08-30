@@ -1,4 +1,5 @@
+# Output the DNS name of the ALB after the deployment
 output "alb_dns_name" {
-  description = "DNS name of the ALB"
   value = aws_lb.app_lb.dns_name
+  description = "The DNS name of the ALB"
 }
