@@ -6,33 +6,8 @@ on:
         types:
             - completed
 jobs:
-    artifact:
-        runs-on: ubuntu-latest
-        outputs:
-          docker_image_name: ${{ steps.load-image-name.outputs.image_name }}
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-
-            - name: Download Docker image name artifact
-              uses: actions/download-artifact@v3
-              with:
-                name: docker-image-name
-
-            - name: List files after downloading artifact
-              run: ls -la
-  
-            - name: Print the content of image_name.txt
-              run: cat image_name.txt
-
-            - name: Load Docker image name
-              id: load-image-name
-              run: |
-                IMAGE_NAME=$(cat image_name.txt)
-                echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
     deploy:
         runs-on: ubuntu-latest
-        needs: artifact
       
         steps:
             - name: Checkout code
@@ -51,7 +26,6 @@ jobs:
               env:
                 AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                 AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                TF_VAR_docker_image: ${{ env.IMAGE_NAME }}
                 TF_VAR_openweather_api_key: ${{ secrets.OPENWEATHER_API_KEY }}
 
             - name: Post Apply - Output ALB DNS Name

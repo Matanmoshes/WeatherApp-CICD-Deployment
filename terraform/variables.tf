@@ -2,6 +2,7 @@
 variable "docker_image" {
   description = "The Docker image to deploy for the Flask app"
   type = string
+  default = "matanm66/weather-app:latest"
 }
 
 # Define the OpenWeather API key to be passed to the container
