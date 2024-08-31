@@ -19,6 +19,12 @@ jobs:
               with:
                 name: docker-image-name
 
+            - name: List files after downloading artifact
+              run: ls -la
+  
+            - name: Print the content of image_name.txt
+              run: cat image_name.txt
+
             - name: Load Docker image name
               id: load-image-name
               run: |
