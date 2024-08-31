@@ -11,7 +11,7 @@ resource "aws_lb" "app_lb" {
 }
 
 # Create a target group for the ALB to route traffic to ECS tasks
-resource "aws_lb_target_group" "app-tg" {
+resource "aws_lb_target_group" "app_tg" {
     name = "app-tg"
     port = 5000
     protocol = "HTTP"
@@ -34,6 +34,6 @@ resource "aws_lb_listener" "app_lb_listener" {
     protocol = "HTTP"
     default_action {
         type = "forward"
-        target_group_arn = aws_lb_target_group.app-tg.arn
+        target_group_arn = aws_lb_target_group.app_tg.arn
     }
 }
