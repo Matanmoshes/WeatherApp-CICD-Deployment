@@ -18,6 +18,7 @@ resource "aws_route_table" "public_rt" {
         cidr_block = "0.0.0.0/0"
         gateway_id = aws_internet_gateway.igw.id
     }
+    
 }
 
 # Create public subnets within the VPC using the defined CIDR blocks
