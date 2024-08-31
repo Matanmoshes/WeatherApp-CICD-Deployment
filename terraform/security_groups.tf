@@ -4,19 +4,23 @@ resource "aws_security_group" "alb_sg" {
   vpc_id = aws_vpc.main.id
 
   # Allow inbound HTTP traffic on port 80 from anywhere
-  ingress = {
+  ingress = [
+    {
     from_port = 80
     to_port = 80
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+    } 
+  ]
   # Allow all outbound traffic
-  egress = {
+  egress = [
+    {
     from_port = 0
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+    }
+  ]
   tags = {
     Name = "alb-sg"
   }
@@ -28,20 +32,24 @@ resource "aws_security_group" "ecs_sg" {
   vpc_id = aws_vpc.main.id
 
   # Allow inbound traffic from the ALB on port 5000
-  ingress {
+  ingress = [
+    {
     from_port   = 5000
     to_port     = 5000
     protocol    = "tcp"
     security_groups = [aws_security_group.alb_sg.id]  # Allow traffic only from ALB security group
-  }
+    }
+  ]
 
   # Allow all outbound traffic
-  egress {
+  egress = [ 
+    {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-  }
+    }
+  ]
 
   tags = {
     Name = "ecs-sg"
