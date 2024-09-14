@@ -113,7 +113,7 @@ Before running the project, you will need:
 
 ---
 
-### **Conclusion**
+#### **Conclusion**
 
 This project demonstrates my ability to design, deploy, and manage a secure cloud-based application using **AWS ECS** with **Fargate**. It showcases security by design, with a focus on limiting access to the container cluster using **security groups**, encrypting traffic with an **SSL certificate**, and automating infrastructure provisioning using **Terraform**. The CI/CD pipeline automates the integration and deployment process, ensuring that code changes are tested, built, and deployed seamlessly.
 
