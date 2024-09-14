@@ -5,9 +5,9 @@ resource "aws_security_group" "alb_sg" {
 
   # Allow inbound HTTP traffic on port 80 from anywhere
   ingress {
-    description = "Allow HTTP traffic on port 80 from anywhere"
-    from_port   = 80
-    to_port     = 80
+    description = "Allow HTTPS traffic on port 443 from anywhere"
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
