@@ -1,6 +1,6 @@
 ---
 
-### **Project Overview**
+# **Weather App CI/CD Project Overview**
 
 In this project, I have designed and deployed a **Weather Application** using **Python Flask**, which fetches real-time weather data from the **OpenWeather API**. The application is containerized using **Docker** and deployed on **AWS ECS (Elastic Container Service)** with **Fargate** to handle the container orchestration. All infrastructure resources are provisioned using **Terraform**, ensuring a secure, scalable, and automated deployment process.
 
@@ -8,7 +8,7 @@ The application is accessible via the domain `WeatherApp.matan-moshe.online`, ma
 
 ---
 
-### **CI/CD Flow**
+## **CI/CD Flow**
 
 The **CI/CD pipeline** for this project is automated using **GitHub Actions** to streamline the entire deployment process.
 
@@ -30,7 +30,7 @@ The **CI/CD pipeline** for this project is automated using **GitHub Actions** to
 
 ---
 
-### **AWS Infrastructure Provisioning with Terraform**
+## **AWS Infrastructure Provisioning with Terraform**
 
 The infrastructure for this project is designed with security, scalability, and automation in mind, and is entirely provisioned via **Terraform**:
 
@@ -63,7 +63,7 @@ The infrastructure for this project is designed with security, scalability, and 
 
 ---
 
-### **Requirements**
+## **Requirements**
 
 Before running the project, you will need:
 
@@ -75,7 +75,7 @@ Before running the project, you will need:
 
 ---
 
-### **How to Run the Project**
+## **How to Run the Project**
 
 1. **Clone the Repository**:
    ```bash
@@ -113,7 +113,7 @@ Before running the project, you will need:
 
 ---
 
-#### **Conclusion**
+## **Conclusion**
 
 This project demonstrates my ability to design, deploy, and manage a secure cloud-based application using **AWS ECS** with **Fargate**. It showcases security by design, with a focus on limiting access to the container cluster using **security groups**, encrypting traffic with an **SSL certificate**, and automating infrastructure provisioning using **Terraform**. The CI/CD pipeline automates the integration and deployment process, ensuring that code changes are tested, built, and deployed seamlessly.
 

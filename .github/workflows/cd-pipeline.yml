@@ -35,6 +35,12 @@ jobs:
               run: terraform output -raw alb_dns_name
               working-directory: terraform
               id: alb_dns_output
+              env:
+                AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
             - name: Display the application URL
               run: echo "Application is deployed at http://$(terraform output -raw alb_dns_name)"
+              env:
+                AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
