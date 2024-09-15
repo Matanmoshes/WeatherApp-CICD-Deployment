@@ -26,7 +26,8 @@ The **CI/CD pipeline** for this project is automated using **GitHub Actions** to
         - Deploys the application as an **ECS Cluster** using **Fargate**.
         - Manages DNS for `WeatherApp.matan-moshe.online` through **Route 53**, with a **CNAME** pointing to the ALB.
 
-*Visual representation of the CI/CD architecture will be added here.*
+![image](https://github.com/user-attachments/assets/89ac0fce-f5db-48dc-965d-c28da98f83a8)
+
 
 ---
 
@@ -59,7 +60,8 @@ The infrastructure for this project is designed with security, scalability, and 
 6. **Auto Scaling**:
     - The ECS service includes **Auto Scaling policies**, scaling in and out based on **CPU utilization** thresholds (50% for scaling out and 30% for scaling in), ensuring optimal resource usage.
 
-*Here, I will include visual architecture diagrams to illustrate the AWS infrastructure.*
+![image](https://github.com/user-attachments/assets/f72f6ac2-52b9-454e-bcf6-e583b7bf51fb)
+
 
 ---
 
