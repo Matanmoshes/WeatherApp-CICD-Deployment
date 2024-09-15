@@ -28,9 +28,19 @@ resource "aws_lb_target_group" "app_tg" {
 }
 
 # Create an HTTP listener on port 80 for the ALB
-resource "aws_lb_listener" "app_lb_listener" {
+resource "aws_lb_listener" "app_lb_listener_HTTP" {
     load_balancer_arn = aws_lb.app_lb.arn
     port = "80"
+    protocol = "HTTP"
+    default_action {
+        type = "forward"
+        target_group_arn = aws_lb_target_group.app_tg.arn
+    }
+}
+
+resource "aws_lb_listener" "app_lb_listener_HTTPS" {
+    load_balancer_arn = aws_lb.app_lb.arn
+    port = "443"
     protocol = "HTTP"
     default_action {
         type = "forward"
